@@ -17,14 +17,11 @@ if __name__ == '__main__':
 
 		result = GoToStartPosition().go_to_start_position_client("gripper", "uncouple") 
 		if result.result == True:				
-			result2 = GoToSlot().go_to_slot_client("gripper", "uncouple")
-			result2 = True
+			result2 = GoToSlot().go_to_slot_client("gripper", "uncouple")	
 			if result2.result == True:
-				'''
-				result3 = ToolchangerOpen.toolchanger_open_client()
-					
+				result3 = ToolchangerOpen.toolchanger_open_client()					
 				if result3 == 'yes':
-					#result4 = GoBackToStart().go_back_to_start_client("gripper","upAndMove")
+					result4 = GoBackToStart().go_back_to_start_client("gripper","upAndMove")
 					
 					if result4 == True:
 						print "gripper_uncoupled OK!"
@@ -33,7 +30,7 @@ if __name__ == '__main__':
 						
 				else:
 					print "gripper_uncouple failed !"
-				'''	
+					
 			else:
 				print "gripper_uncouple failed !"
 			

@@ -118,6 +118,7 @@ At time 1405686804.878
 - Translation: [-0.459, -0.066, 0.934]
 - Rotation: in Quaternion [0.998, 0.003, 0.021, 0.053]
             in RPY [3.036, -0.042, 0.008]
+
  /base_link /head_cam3d_link
 At time 1405686846.106
 - Translation: [-0.005, -0.016, 1.200]
@@ -133,6 +134,9 @@ At time 1405693784.849
 - Rotation: in Quaternion [0.523, 0.466, 0.463, 0.543]
             in RPY [1.552, 0.022, 1.435]
 
+./move_base_relative_to_marker.py 1 (gripper)
+./move_base_relative_to_marker.py 2 (vac)
+
 
 */
                                        /////   EE    //////
@@ -144,18 +148,17 @@ static const double TOOL_CHANGER_OFFSET_ANGLE = - 0.29;
 
                                     //////    GRIPPER    /////
 //3 fidu // static const tf::Vector3 START_POINT_OFFSET_ARM = tf::Vector3(-0.106, -0.075, 0.21);
-static const tf::Vector3 START_POINT_OFFSET_ARM = tf::Vector3(-0.106, -0.075, 0.21);
+static const tf::Vector3 START_POINT_OFFSET_ARM = tf::Vector3(-0.108, -0.076, 0.21);
 //3fidu //static const tf::Vector3 SLOT_POINT_OFFSET_ARM = tf::Vector3(-0.105, -0.075, 0.1345);
-static const tf::Vector3 SLOT_POINT_OFFSET_ARM = tf::Vector3(-0.106, -0.075, 0.135);
+static const tf::Vector3 SLOT_POINT_OFFSET_ARM = tf::Vector3(-0.108, -0.075, 0.135);
 
 //inportant y-axes
 //3 fidu // static const tf::Vector3 SLOT_POINT_DOWN_ARM = tf::Vector3(-0.106, -0.086, 0.134);
-static const tf::Vector3 SLOT_POINT_DOWN_ARM = tf::Vector3(-0.108, -0.087, 0.135);
+static const tf::Vector3 SLOT_POINT_DOWN_ARM = tf::Vector3(-0.1085, -0.088, 0.135);
 
 
 static const tf::Vector3 START_POINT_OFFSET_COUPLE_ARM = tf::Vector3(-0.106, -0.065, 0.21);
-static const tf::Vector3 SLOT_POINT_OFFSET_COUPLE_ARM = tf::Vector3(-0.106, -0.070, 0.135);
-
+static const tf::Vector3 SLOT_POINT_OFFSET_COUPLE_ARM = tf::Vector3(-0.107, -0.070, 0.1345);
                                   /////   VAC   //////
 
 
@@ -163,31 +166,11 @@ static const tf::Vector3 START_POINT_OFFSET_VAC = tf::Vector3(0.064, -0.075, 0.2
 static const tf::Vector3 SLOT_POINT_OFFSET_VAC = tf::Vector3(0.064, -0.075, 0.137);
 
 static const tf::Vector3 START_POINT_OFFSET_COUPLE_VAC = tf::Vector3(0.064, -0.065, 0.21);
-static const tf::Vector3 SLOT_POINT_OFFSET_COUPLE_VAC = tf::Vector3(0.064, -0.070, 0.137);
+static const tf::Vector3 SLOT_POINT_OFFSET_COUPLE_VAC = tf::Vector3(0.064, -0.070, 0.135);
 
-static const tf::Vector3 SLOT_POINT_DOWN_VAC = tf::Vector3(0.063, -0.087, 0.137);
-
-
-////Fidu arm
-/*
- /base_link /fiducial/tag_board
-At time 1405683169.854
-- Translation: [-0.694, -0.016, 1.003]
-- Rotation: in Quaternion [0.477, 0.526, 0.510, 0.486]
-            in RPY [1.578, 0.024, 1.644]
+static const tf::Vector3 SLOT_POINT_DOWN_VAC = tf::Vector3(0.063, -0.088, 0.137);
 
 
-/base_link /fiducial/tag_board
-At time 1405505474.417
-- Translation: [-0.680, -0.010, 1.003]
-- Rotation: in Quaternion [0.473, 0.524, 0.514, 0.487]
-            in RPY [1.568, 0.026, 1.649]
-
- *
- * //Fidu vac
-
-
- */
 
 class ToolChange
 {
@@ -287,6 +270,8 @@ protected:
 	void printPose(tf::Transform& trans_msg);
 	void printMsg(const geometry_msgs::PoseStamped pose);
 	void printVector(const std::vector<double> v);
+	void Tolerance(const std::string& method, const std::string& action,
+			const std::string& tool,const std::string& source_frame, const std::string& target_frame);
 
 	//void test();
 };
